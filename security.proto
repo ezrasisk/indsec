@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package security;
+
+message SecurityEvent {
+    string device_id = 1;
+    string user_id = 2;
+    string event_type = 3; //such as "motion" or "door_open"
+}
+
+message SecurityCommand {
+    string command = 1; //such as "arm" or "disarm"
+}
+
+message Notification {
+    string user_id = 1;
+    string message = 2;
+}
+
+service SecurityService {
+    rpc SendEvent (SecurityEvent) returns (Notification);
+    rpc ControlSecurity (SecurityCommand) returns (Notification);
+}
